@@ -4,6 +4,6 @@ services:
   server:
     build: .
     volumes:
-      - ./geojson:/geojson
+      - ./geojson:/usr/share/nginx/geojson
     ports:
-     - "8080:80"
+     - "8080:8081"
