@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: test-deployment
+spec:
+  selector:
+    matchLabels:
+      app: nginx
+  replicas: 2
+  template:
+    metadata:
+      labels:
+        app: nginx
+    spec:
+      containers:
+      - name: nginx
+        image: ghcr.io/eemilhaa/travel-time-matrix-visualisation-backend:deploy-rahti
+        ports:
+        - containerPort: 8081  # unprivileged
+        requests:
+          memory: "200M"
+          cpu: "200m"
+        limits:
+          memory: "1G"
+          cpu: "1"
