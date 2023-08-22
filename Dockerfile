@@ -1,6 +1,8 @@
 FROM nginx:alpine
 
 COPY ./nginx.conf /etc/nginx/nginx.conf
+# TODO
+COPY ./geojson-example/grid.geojson /usr/share/nginx/geojson/grid.geojson
 
 # Remove default welcome page
 RUN rm /usr/share/nginx/html/index.html
