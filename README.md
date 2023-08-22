@@ -9,7 +9,7 @@ for producing the data.
 ## Technology
 - Nginx to serve the files
 
-## Development
+## Local development
 The backend service is containerized,
 so the only requirement for running it is a container engine such as podman or docker.
 
@@ -22,3 +22,16 @@ to start the service.
 The server serves files from the `geojson/` directory on http://localhost:8080/.
 You can copy the contents of `geojson-example/` to `geojson/`
 in order to get example data for a single grid cell.
+
+## Deploying to rahti
+Deoploying is done with OpenShift / Kubernetes.
+The command line tool `oc` is needed to communicate with openshift.
+
+After authenticating you can create a deployment with:
+```console
+oc create -f manifest.yml
+```
+And delete it with:
+```console
+oc delete all --selector app=ttm
+```
