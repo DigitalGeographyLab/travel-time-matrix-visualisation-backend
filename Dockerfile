@@ -4,8 +4,7 @@ COPY ./nginx.conf /etc/nginx/nginx.conf
 # TODO
 COPY ./geojson-example/grid.geojson /usr/share/nginx/geojson/grid.geojson
 
-# Remove default welcome page
-RUN rm /usr/share/nginx/html/index.html
+RUN mv /usr/share/nginx/html/index.html /usr/share/nginx/geojson/index.html
 
 # 1. support running as arbitrary user which belogs to the root group
 # 2. users are not allowed to listen on priviliged ports
