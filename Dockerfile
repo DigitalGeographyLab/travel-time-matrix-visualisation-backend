@@ -2,6 +2,7 @@ FROM nginx:alpine
 
 COPY ./nginx.conf /etc/nginx/nginx.conf
 # TODO
+RUN mkdir -p /usr/share/nginx/geojson
 COPY ./geojson-example/grid.geojson /usr/share/nginx/geojson/grid.geojson
 
 RUN mv /usr/share/nginx/html/index.html /usr/share/nginx/geojson/index.html
