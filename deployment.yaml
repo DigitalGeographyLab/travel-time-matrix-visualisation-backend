@@ -1,37 +1,43 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: nginx-service
+  name: ttm-service
+  labels:
+    app: ttm
 spec:
   ports:
   - port: 8081
   selector:
-    app: nginx-deployment
+    app: ttm-server
 ---
 apiVersion: v1
 kind: Route
 metadata:
-  name: nginx-route
+  name: ttm-route
+  labels:
+    app: ttm
 spec:
   host: ttm-test.rahtiapp.fi
   to:
     kind: Service
-    name: nginx-service
+    name: ttm-service
     # weight: 100
 ---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: nginx-deployment
+  name: ttm-server
+  labels:
+    app: ttm
 spec:
   selector:
     matchLabels:
-      app: nginx-deployment
+      app: ttm-server
   replicas: 2
   template:
     metadata:
       labels:
-        app: nginx-deployment
+        app: ttm-server
     spec:
       containers:
       - name: nginx
