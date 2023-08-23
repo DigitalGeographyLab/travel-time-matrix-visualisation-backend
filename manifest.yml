@@ -42,6 +42,7 @@ spec:
       containers:
       - name: nginx
         image: ghcr.io/eemilhaa/travel-time-matrix-visualisation-backend:deploy-rahti
+        imagePullPolicy: Always
         ports:
         - containerPort: 8081  # unprivileged
         requests:
