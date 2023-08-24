@@ -1,11 +1,8 @@
 FROM nginx:alpine
 
 COPY ./nginx.conf /etc/nginx/nginx.conf
-# TODO
-RUN mkdir -p /usr/share/nginx/geojson
-COPY ./geojson-example/grid.geojson /usr/share/nginx/geojson/grid.geojson
 
-RUN mv /usr/share/nginx/html/index.html /usr/share/nginx/geojson/index.html
+RUN mkdir -p /usr/share/nginx/geojson
 
 # 1. support running as arbitrary user which belogs to the root group
 # 2. users are not allowed to listen on priviliged ports
