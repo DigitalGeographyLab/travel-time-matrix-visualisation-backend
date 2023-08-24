@@ -23,10 +23,36 @@ spec:
     name: ttm-service
     # weight: 100
 ---
+# kind: PersistentVolume
+# apiVersion: v1
+# metadata:
+#   name: geojson-vol
+#   # labels:
+#   #   type: local
+# spec:
+#   storageClassName: pv-demo 
+#   capacity:
+#     storage: 10Gi
+#   accessModes:
+#     - ReadWriteMany
+#   hostPath:
+#     path: "/mnt/persistent-volume"
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: ttm-pvc
+spec:
+  accessModes:
+  - ReadWriteMany
+  resources:
+    requests:
+      storage: 10Gi
+---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: ttm-server
+  name: ttm-deployment
   labels:
     app: ttm
 spec:
@@ -40,12 +66,9 @@ spec:
         app: ttm-server
     spec:
       containers:
-      - name: nginx
+      - name: ttm-server
         image: ghcr.io/eemilhaa/travel-time-matrix-visualisation-backend:deploy-rahti
         imagePullPolicy: Always
-        volumeMounts:
-        - mountPath: /usr/share/nginx/geojson
-          name: geojson-vol
         ports:
         - containerPort: 8081  # unprivileged
         requests:
@@ -54,20 +77,10 @@ spec:
         limits:
           memory: "1G"
           cpu: "1"
+        volumeMounts:
+        - mountPath: /usr/share/nginx/geojson
+          name: geojson-vol
       volumes:
       - name: geojson-vol
         persistentVolumeClaim:
-        claimName: ttm-pvc
----
-apiVersion: v1
-kind: PersistentVolumeClaim
-metadata:
-  name: ttm-pvc
-  labels:
-    app: ttm
-spec:
-  accessModes:
-  - ReadOnlyMany
-  resources:
-    requests:
-      storage: 10Gi
+          claimName: ttm-pvc
