@@ -23,28 +23,13 @@ spec:
     name: ttm-service
     # weight: 100
 ---
-# kind: PersistentVolume
-# apiVersion: v1
-# metadata:
-#   name: geojson-vol
-#   # labels:
-#   #   type: local
-# spec:
-#   storageClassName: pv-demo 
-#   capacity:
-#     storage: 10Gi
-#   accessModes:
-#     - ReadWriteMany
-#   hostPath:
-#     path: "/mnt/persistent-volume"
----
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
   name: ttm-pvc
 spec:
   accessModes:
-  - ReadWriteMany
+  - ReadOnlyMany
   resources:
     requests:
       storage: 10Gi
@@ -68,9 +53,9 @@ spec:
       containers:
       - name: ttm-server
         image: ghcr.io/eemilhaa/travel-time-matrix-visualisation-backend:deploy-rahti
-        imagePullPolicy: Always
+        imagePullPolicy: Always  # Change this when stable
         ports:
-        - containerPort: 8081  # unprivileged
+        - containerPort: 8081  # See Dockerfile
         requests:
           memory: "200M"
           cpu: "200m"
