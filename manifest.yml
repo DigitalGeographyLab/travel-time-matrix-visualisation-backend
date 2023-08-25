@@ -1,0 +1,71 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: ttm-service
+  labels:
+    app: ttm
+spec:
+  ports:
+  - port: 8081
+  selector:
+    app: ttm-server
+---
+apiVersion: v1
+kind: Route
+metadata:
+  name: ttm-route
+  labels:
+    app: ttm
+spec:
+  host: ttm-test.rahtiapp.fi
+  to:
+    kind: Service
+    name: ttm-service
+    # weight: 100
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: ttm-pvc
+spec:
+  accessModes:
+  - ReadOnlyMany
+  resources:
+    requests:
+      storage: 10Gi
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ttm-deployment
+  labels:
+    app: ttm
+spec:
+  selector:
+    matchLabels:
+      app: ttm-server
+  replicas: 2
+  template:
+    metadata:
+      labels:
+        app: ttm-server
+    spec:
+      containers:
+      - name: ttm-server
+        image: ghcr.io/eemilhaa/travel-time-matrix-visualisation-backend:main
+        imagePullPolicy: Always  # Change this when stable
+        ports:
+        - containerPort: 8081  # See Dockerfile
+        requests:
+          memory: "200M"
+          cpu: "200m"
+        limits:
+          memory: "1G"
+          cpu: "1"
+        volumeMounts:
+        - mountPath: /usr/share/nginx/geojson
+          name: geojson-vol
+      volumes:
+      - name: geojson-vol
+        persistentVolumeClaim:
+          claimName: ttm-pvc

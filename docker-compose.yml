@@ -2,9 +2,8 @@ version: "3"
 
 services:
   server:
-    image: docker.io/library/nginx:latest
+    build: .
     volumes:
-      - ./geojson:/geojson
-      - ./nginx.conf:/etc/nginx/nginx.conf
+      - ./geojson:/usr/share/nginx/geojson
     ports:
-     - "8080:80"
+     - "8080:8081"
