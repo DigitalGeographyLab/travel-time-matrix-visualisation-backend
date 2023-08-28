@@ -17,7 +17,7 @@ metadata:
   labels:
     app: ttm
 spec:
-  host: ttm-test.rahtiapp.fi
+  host: ttm-isochrones.rahtiapp.fi
   to:
     kind: Service
     name: ttm-service
