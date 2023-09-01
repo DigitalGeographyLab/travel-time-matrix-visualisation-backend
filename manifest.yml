@@ -60,8 +60,8 @@ spec:
           memory: "200M"
           cpu: "200m"
         limits:
-          memory: "1G"
-          cpu: "1"
+          memory: "8G"
+          cpu: "2"
         volumeMounts:
         - mountPath: /usr/share/nginx/geojson
           name: geojson-vol
