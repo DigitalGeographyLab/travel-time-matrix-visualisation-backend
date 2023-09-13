@@ -1,5 +1,7 @@
 FROM nginx:alpine
 
+RUN apk add --no-cache rsync
+
 COPY ./nginx.conf /etc/nginx/nginx.conf
 
 RUN mkdir -p /usr/share/nginx/geojson
