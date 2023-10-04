@@ -34,7 +34,7 @@ spec:
   - ReadOnlyMany
   resources:
     requests:
-      storage: 50Gi
+      storage: 5Gi
 ---
 apiVersion: apps/v1
 kind: Deployment

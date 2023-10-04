@@ -1,8 +1,10 @@
 # TTM-backend
 A backend to serve travel time matrices as geodata.
-Matrices are served as catchment polygons in geojson fromat,
-one file per grid cell / travel mode / year combination.
+Matrices are served as catchment polygons in geojson format,
+precompressed with gzip.
+There is one file for every grid cell / travel mode combination.
 
+This repository holds only what is necessary to serve the ready-made data.
 See [preprocessing](https://github.com/DigitalGeographyLab/travel-time-matrix-visualisation-preprocessing)
 for producing the data.
 
