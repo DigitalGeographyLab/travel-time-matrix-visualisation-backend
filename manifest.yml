@@ -54,7 +54,7 @@ spec:
     spec:
       containers:
       - name: ttm-server
-        image: ghcr.io/eemilhaa/travel-time-matrix-visualisation-backend:precompress
+        image: ghcr.io/eemilhaa/travel-time-matrix-visualisation-backend:main
         imagePullPolicy: Always  # Change this when stable
         ports:
         - containerPort: 8081  # See Dockerfile
