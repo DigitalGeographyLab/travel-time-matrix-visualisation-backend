@@ -34,7 +34,7 @@ spec:
   - ReadOnlyMany
   resources:
     requests:
-      storage: 50Gi
+      storage: 5Gi
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -54,7 +54,7 @@ spec:
     spec:
       containers:
       - name: ttm-server
-        image: ghcr.io/eemilhaa/travel-time-matrix-visualisation-backend:main
+        image: ghcr.io/eemilhaa/travel-time-matrix-visualisation-backend:precompress
         imagePullPolicy: Always  # Change this when stable
         ports:
         - containerPort: 8081  # See Dockerfile
